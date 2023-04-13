@@ -8,9 +8,10 @@ void Menu() {
 	cout << "3. Send Money \n";
 	cout << "4. Reset/ Change Pin \n";
 	cout << "5. Exit \n";
+	
 }
 
-int main() {
+int process() {
 	
 	int option;
 	double amount, balance = 1000;
@@ -29,9 +30,8 @@ int main() {
 				
 			case 2: cout << "Withdraw amount: $";
 				cin >> amount;
-				if (amount <= balance) {
+				if (amount <= balance) 
 					balance -= amount;
-				}
 				else
 					cout << "Not Enough Balance.\n\n";
 				break;
@@ -56,6 +56,9 @@ int main() {
 				break;
 				
 			case 4: for (int i = 0; i < 3; i++) {
+				if (i > 0) 
+					cout << "Incorrect Pin.\n\n";
+					
 				cout << "Enter Current Pin: ";
 				cin >> pin1;
 				if (pin1 == pin) {
@@ -64,17 +67,22 @@ int main() {
 					if (pin1.size() == 4){
 						pin = pin1;
 						i += 3;
+//						Menu();
 					}
 					else
 						cout << "Pin must be 4 numbers.\n";
-				}
-			}
-			system("cls");
-			cout << "Account have been disabled for the next 24 hours.\n";
+				}	
+			}		
 			option = 5;	
 				break;
 		}	
 	} while (option != 5);
+
+}
+
+int main() {
+
+	process();
 	
 	system("pause>0");
 }
