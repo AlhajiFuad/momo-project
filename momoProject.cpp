@@ -11,6 +11,19 @@ void Menu() {
 	
 }
 
+void checkPin() {
+	string pin = "0000", pin1;
+	
+	cout << "Enter Pin: ";
+	cin >> pin1;
+	system("cls");
+	if (pin1 != pin){		
+		cout << "Incorrect Pin.\n";
+		Menu();
+	}
+	
+}
+
 int process() {
 	
 	int option;
@@ -30,8 +43,10 @@ int process() {
 				
 			case 2: cout << "Withdraw amount: $";
 				cin >> amount;
-				if (amount <= balance) 
+				if (amount <= balance) { 
+					checkPin();
 					balance -= amount;
+				}
 				else
 					cout << "Not Enough Balance.\n\n";
 				break;
@@ -41,15 +56,9 @@ int process() {
 				if (amount <= balance) {
 					cout << "Reciever's address: ";
 					cin >> reciever;
-					cout << "Enter Pin: ";
-					cin >> pin1;
-					system("cls");
-					if (pin1 == pin){
-						balance -= amount;
-						cout << "$" << amount << " Successfully sent.\n\n";
-					}
-					else
-						cout << "Incorrect Pin.\n";
+					checkPin();
+					balance -= amount;
+					cout << "$" << amount << " Successfully sent.\n\n";
 				}
 				else
 					cout << "Not Enough Balance.\n\n";				
@@ -59,24 +68,23 @@ int process() {
 				if (i > 0) 
 					cout << "Incorrect Pin.\n\n";
 					
-				cout << "Enter Current Pin: ";
+				checkPin();
+				
+				cout << "Set/ Enter New Pin: ";
 				cin >> pin1;
-				if (pin1 == pin) {
-					cout << "Set/ Enter New Pin: ";
-					cin >> pin1;
-					if (pin1.size() == 4){
-						pin = pin1;
-						i += 3;
-//						Menu();
-					}
-					else
-						cout << "Pin must be 4 numbers.\n";
+				if (pin1.size() == 4){
+					pin = pin1;
+					i += 3;
+//					Menu();
+				}
+				else
+					cout << "Pin must be 4 numbers.\n";
 				}	
 			}		
 			option = 5;	
-				break;
-		}	
-	} while (option != 5);
+			break;
+	}	
+	while (option != 5);
 
 }
 
